@@ -8,6 +8,16 @@ class LinkedList
         @tail = nil;
     end
 
+    def to_s
+        current_node = @head
+        until current_node.nil?
+            print "(#{current_node.value}) -> "
+            current_node = current_node.next_node
+        end
+    end
+
+    #########################################################
+
     def append(value)
         new_node = Node.new(value)
         @head ||= new_node
@@ -16,14 +26,10 @@ class LinkedList
             @tail.next_node = new_node
         end
         @tail = new_node
-    end
+    end    
 
-    #########################################################
-    def to_s
-        current_node = @head
-        until current_node.nil?
-            print "(#{current_node.value}) -> "
-            current_node = current_node.next_node
-        end
+    def prepend(value)
+        new_node = Node.new(value, @head)
+        @head = new_node
     end
 end
