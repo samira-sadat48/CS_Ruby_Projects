@@ -13,3 +13,9 @@ my_list.append('test2')
 my_list.append('test3')
 puts my_list
 puts my_list.at(2) #test1
+my_list.pop
+puts my_list
+puts my_list.contains?('test1')
+puts my_list.contains?('Samira')
+puts my_list.find('test1')
+puts my_list.find('Samira')
