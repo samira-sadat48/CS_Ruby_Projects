@@ -57,7 +57,7 @@ class LinkedList
         index.times do
             current_node = current_node.next_node
         end
-        current_node.value
+        current_node
     end
 
     def pop
@@ -90,5 +90,35 @@ class LinkedList
             current_node = current_node.next_node
         end
         return 'nil'
+    end
+
+    def insert_at(value,index)
+        if index > size
+            return puts 'Error: Index is outside the list' 
+        end
+
+        if index == 0
+            prepend(value)
+        else
+            current_node = @head
+            new_node = Node.new(value, at(index))
+            previous = at(index-1)
+            previous.next_node = new_node
+            @tail = new_node if new_node.next_node.nil?
+        end
+    end
+
+    def remove_at(index)
+        if index > size
+            return puts 'Error: Index is outside the list' 
+        end
+
+        if index == (size-1)
+            pop
+        else
+            current_node = at(index)
+            previous = at(index-1)
+            previous.next_node = current_node.next_node
+        end
     end
 end

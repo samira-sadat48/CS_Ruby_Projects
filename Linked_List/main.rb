@@ -19,3 +19,7 @@ puts my_list.contains?('test1')
 puts my_list.contains?('Samira')
 puts my_list.find('test1')
 puts my_list.find('Samira')
+my_list.insert_at('insert test',2)
+puts my_list
+my_list.remove_at(2)
+puts my_list
