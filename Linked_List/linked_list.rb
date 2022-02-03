@@ -42,4 +42,20 @@ class LinkedList
         end
         count
     end
+
+    def head
+        @head.value
+    end
+
+    def tail
+        @tail.value
+    end
+
+    def at(index)
+        current_node = @head
+        index.times do
+            current_node = current_node.next_node
+        end
+        current_node.value
+    end
 end

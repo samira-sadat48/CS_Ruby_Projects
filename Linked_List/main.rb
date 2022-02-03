@@ -7,3 +7,9 @@ puts my_list
 my_list.prepend('first')
 puts my_list
 puts my_list.size
+puts my_list.head
+my_list.append('test1')
+my_list.append('test2')
+my_list.append('test3')
+puts my_list
+puts my_list.at(2) #test1
