@@ -32,4 +32,14 @@ class LinkedList
         new_node = Node.new(value, @head)
         @head = new_node
     end
+
+    def size
+        count = 0
+        current_node = @head
+        until current_node.nil?
+            count += 1
+            current_node = current_node.next_node
+        end
+        count
+    end
 end
