@@ -47,6 +47,84 @@ class Tree
         end
     end
 
+    def level_order(node = @root, queue = [])
+        print "#{node.data} "
+        queue << node.left unless node.left.nil?
+        queue << node.right unless node.right.nil?
+        return if queue.empty?
+    
+        level_order(queue.shift, queue)
+    end
+
+    def preorder(node = @root)
+        # Root Left Right
+        return if node.nil?
+    
+        print "#{node.data} "
+        preorder(node.left)
+        preorder(node.right)
+    end
+    
+    def inorder(node = @root)
+        # Left Root Right
+        return if node.nil?
+    
+        inorder(node.left)
+        print "#{node.data} "
+        inorder(node.right)
+    end
+    
+    def postorder(node = @root)
+        # Left Right Root
+        return if node.nil?
+    
+        postorder(node.left)
+        postorder(node.right)
+        print "#{node.data} "
+    end
+
+    def height(node = @root)
+        unless node.nil? || node == root
+          node = (node.instance_of?(Node) ? find(node.data) : find(node))
+        end
+    
+        return -1 if node.nil?
+    
+        [height(node.left), height(node.right)].max + 1
+    end
+
+    def depth(node = root, parent = root, edges = 0)
+        return 0 if node == parent
+        return -1 if parent.nil?
+    
+        if node < parent.data
+          edges += 1
+          depth(node, parent.left, edges)
+        elsif node > parent.data
+          edges += 1
+          depth(node, parent.right, edges)
+        else
+          edges
+        end
+    end
+
+
+    def balanced?(node = root)
+        return true if node.nil?
+
+        left_height = height(node.left)
+        right_height = height(node.right)
+
+        return true if (left_height - right_height).abs <= 1 && balanced?(node.left) && balanced?(node.right)
+
+        false
+    end
+
+    def rebalance
+        self.data = inorder_array
+        self.root = build_tree(data)
+    end
+    
     private
 
     def build_tree(data)
@@ -95,6 +173,15 @@ class Tree
         return result unless result.nil?
     
         find_inorder_successor(successor + 1)
+    end
+
+    def inorder_array(node = root, array = [])
+        unless node.nil?
+          inorder_array(node.left, array)
+          array << node.data
+          inorder_array(node.right, array)
+        end
+        array
     end
 
 end
